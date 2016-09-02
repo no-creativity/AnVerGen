@@ -1,4 +1,7 @@
 # AnVerGen
+
+[![Build Status](https://travis-ci.org/yanqd0/AnVerGen.svg?branch=master)](https://travis-ci.org/yanqd0/AnVerGen)
+
 An automatic version generator for Android applications.
 
 ## License
