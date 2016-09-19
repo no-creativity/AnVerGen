@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.yanqd0.anvergen
+package org.no_creativity.anvergen
 
 import org.junit.Test
 
