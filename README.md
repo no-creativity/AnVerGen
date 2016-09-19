@@ -1,8 +1,8 @@
-# AnVerGen
+# AnVerGen - Android Version Generator
 
-[![Build Status](https://travis-ci.org/yanqd0/AnVerGen.svg?branch=master)](https://travis-ci.org/yanqd0/AnVerGen)
+[![Build Status](https://travis-ci.org/no-creativity/AnVerGen.svg?branch=master)](https://travis-ci.org/no-creativity/AnVerGen)
 
-An automatic version generator for Android applications.
+An automatic version generator for Android applications, implemented by Groovy.
 
 ## License
 
