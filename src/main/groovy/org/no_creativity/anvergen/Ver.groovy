@@ -20,7 +20,7 @@ package org.no_creativity.anvergen
  * @author yanqd0
  */
 class Ver {
-    private static int commits = 0
+    private static def commits = 0
 
     private static getCommitCount() {
         if (commits == 0) {
@@ -31,12 +31,10 @@ class Ver {
         return commits
     }
 
-    @SuppressWarnings("GroovyUnusedDeclaration")
     public static int generateVersionCode() {
         return getCommitCount()
     }
 
-    @SuppressWarnings("GroovyUnusedDeclaration")
     public static String generateVersionName(String version = "1.0", int offset = 0) {
         int count = getCommitCount() - offset
         String sha1 = getGitDescription()
