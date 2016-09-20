@@ -1,4 +1,4 @@
-group 'AnVerGen'
+group 'org.no_creativity.anvergen'
 version '0.1'
 
 apply plugin: 'groovy'
