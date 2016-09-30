@@ -9,7 +9,7 @@
     },
     "files": [
         {
-            "includePattern": "build/libs/AnVerGen.*.jar",
+            "includePattern": "build/libs/AnVerGen(.*\.jar)",
             "uploadPattern": "$1"
         }
     ],
