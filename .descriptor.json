@@ -1,15 +1,16 @@
 {
     "package": {
-        "name": "maven",
-        "repo": "AnVerGen",
+        "name": "AnVerGen",
+        "repo": "maven",
         "subject": "no-creativity"
     },
     "version": {
+        "name": "0.5",
         "gpgSign": false
     },
     "files": [
         {
-            "includePattern": "build/libs/AnVerGen(.*\.jar)",
+            "includePattern": "build/libs/(.*\.jar)",
             "uploadPattern": "$1"
         }
     ],

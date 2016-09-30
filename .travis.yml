@@ -21,7 +21,6 @@ deploy:
     skip_cleanup: true
     file: ".descriptor.json"
     user: yanqd0
-    dry-run: 'true'
     on:
       jdk: oraclejdk8
     key:
