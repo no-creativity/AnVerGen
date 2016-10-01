@@ -38,10 +38,8 @@ class VerTest {
     @Test
     public void testGenerateVersionName() throws Exception {
         String name = Ver.generateVersionName()
-        assertTrue(name.startsWith("1.0"))
+        assertTrue(name.startsWith(Git.getLatestTag()))
         assertTrue(name.contains(new Date().format("yyMMdd")))
-
-        String version = "2.0"
-        assertTrue(Ver.generateVersionName(version).startsWith(version))
+        assertTrue(name.endsWith(Git.getShortSha1()))
     }
 }

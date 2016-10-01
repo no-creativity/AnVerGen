@@ -17,34 +17,42 @@
 package org.no_creativity.anvergen
 
 /**
+ * This is a simply version generator for Android applications.
+ * <p>
+ * It works only in a git repository.
+ *
  * @author yanqd0
  */
-class Ver {
-    private static def commits = 0
-
-    private static getCommitCount() {
-        if (commits == 0) {
-            Process process = "git rev-list --count HEAD".execute()
-            process.waitFor()
-            commits = process.getText().toInteger()
-        }
-        return commits
-    }
-
+public class Ver {
+    /**
+     * The versionCode is set to the commit count of git.
+     *
+     * @return The number of commits in git history.
+     */
     public static int generateVersionCode() {
-        return getCommitCount()
+        return Git.calculateCommitCount()
     }
 
-    public static String generateVersionName(String version = "1.0", int offset = 0) {
-        int count = getCommitCount() - offset
-        String sha1 = getGitDescription()
+    /**
+     * The versionName is set to "$version.$subVersion.$date.$shortSha1".
+     *
+     * <ul>
+     * <li><code>$version</code> is the last git tag. If there is no git tag,
+     * it is {@link Git#DEFAULT_TAG}.</li>
+     * <li><code>$subVersion</code> is the commit count from last git tag.</li>
+     * <li><code>$date</code> is the formatted UTC time of compilation.</li>
+     * <li><code>$shortSha1</code> is a substring of SHA1 of current git object.</li>
+     * </ul>
+     *
+     * For example: 0.1.9.161001.fe247f2
+     *
+     * @return The formatted String with git and time information.
+     */
+    public static String generateVersionName() {
+        def version = Git.getLatestTag()
+        def subVersion = Git.calculateCommitCount(version)
         String date = new Date().format("yyMMdd")
-        return "$version.$count.$date.$sha1"
-    }
-
-    private static String getGitDescription() {
-        Process process = "git rev-parse HEAD".execute()
-        process.waitFor()
-        return process.getText().substring(0, 6)
+        String shortSha1 = Git.getShortSha1()
+        return "$version.$subVersion.$date.$shortSha1"
     }
 }
