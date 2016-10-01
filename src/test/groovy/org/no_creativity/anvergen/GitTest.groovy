@@ -75,7 +75,7 @@ public class GitTest {
 
     @Test
     public void getShortSha1() throws Exception {
-        def process = "git describe --always".execute()
+        def process = "git describe --long".execute()
         process.waitFor()
         def description = process.getText()
         def length = description.length()
