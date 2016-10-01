@@ -1,12 +1,26 @@
 RELEASE NOTE
 ============
 
+Release version: 0.2
+------------------------
+
+### Description
+
+It works good now.
+
+### Change log
+
+- A light wrapper for git is added.
+- The generator needs no parameter now.
+- The generated versionName is better.
+- The groovy docs are written.
+
 Pre-release version: 0.1
 ------------------------
 
 ### Description
 
-This is a pre-release version and not recommended to use.
+This is a *pre-release* version and not recommended to use.
 
 It's basically done, but not good enough.
 

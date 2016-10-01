@@ -5,6 +5,14 @@
 
 An automatic version generator for Android applications, implemented by Groovy.
 
+## Environment
+
+| Name   | Version    |
+| :---   | ------:    |
+| JDK    | oraclejdk8 |
+| Groovy | 2.4.7      |
+| Gradle | 2.14.1     |
+
 ## License
 
 >  Copyright 2016 Yan QiDong
