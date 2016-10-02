@@ -1,31 +1,20 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+        classpath 'com.github.no-creativity:AnVerGen:0.2'
+    }
+}
+
+import org.no_creativity.anvergen.Git
+
+def tag = Git.getLatestTag()
+
 group 'org.no_creativity.anvergen'
-
-def getLastTag() {
-    def cmd = "git for-each-ref --sort=-taggerdate --count=1 --format %(tag) refs/tags"
-    def process = cmd.execute()
-    process.waitFor()
-    String tag = process.getText().trim()
-    if (tag.isEmpty()) {
-        tag = "0.0"
-    }
-    return tag
-}
-
-def tag = getLastTag()
-
-def getCommitCount(String tag) {
-    String cmd
-    if ("0.0".equals(tag)) {
-        cmd = "git rev-list --count HEAD"
-    } else {
-        cmd = "git rev-list --count ${tag}...HEAD"
-    }
-    def process = cmd.execute()
-    process.waitFor()
-    return process.getText().toInteger()
-}
-
-version "${tag}.${getCommitCount(tag)}"
+version "${tag}.${Git.calculateCommitCount(tag)}"
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
