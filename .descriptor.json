@@ -33,7 +33,7 @@
         },
         {
             "includePattern": "build/pom.xml",
-            "uploadPattern": "org/no_creativity/anvergen/0.2/$1",
+            "uploadPattern": "org/no_creativity/anvergen/0.2/pom.xml",
             "matrixParams": { "override": 1 }
         }
     ],
