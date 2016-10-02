@@ -86,6 +86,7 @@ gradle-app.setting
 
 
 ### My ###
+.DS_Store
 .idea/.name
 .idea/compiler.xml
 .idea/encodings.xml
