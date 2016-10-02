@@ -1,7 +1,8 @@
 # AnVerGen - Android Version Generator
 
 [![Build Status](https://travis-ci.org/no-creativity/AnVerGen.svg?branch=master)](https://travis-ci.org/no-creativity/AnVerGen)
-[ ![Download](https://api.bintray.com/packages/no-creativity/maven/AnVerGen/images/download.svg) ](https://bintray.com/no-creativity/maven/AnVerGen/_latestVersion)
+[![Download](https://api.bintray.com/packages/no-creativity/maven/AnVerGen/images/download.svg)](https://bintray.com/no-creativity/maven/AnVerGen/_latestVersion)
+[![](https://jitpack.io/v/no-creativity/AnVerGen.svg)](https://jitpack.io/#no-creativity/AnVerGen)
 
 An automatic version generator for Android applications, implemented by Groovy.
 
