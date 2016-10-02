@@ -28,6 +28,7 @@ def getCommitCount(String tag) {
 version "${tag}.${getCommitCount(tag)}"
 
 apply plugin: 'groovy'
+apply plugin: 'maven'
 
 repositories {
     jcenter()
@@ -37,3 +38,20 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.7'
     testCompile 'junit:junit:4.12'
 }
+
+task writePom << {
+    pom {
+        project {
+            inceptionYear '2016'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+        }
+    }.writeTo("$buildDir/pom.xml")
+}
+
+build.dependsOn("writePom")

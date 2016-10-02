@@ -24,7 +24,6 @@ deploy:
     file: ".descriptor.json"
     user: yanqd0
     on:
-      tags: true
       jdk: oraclejdk8
     key:
       secure: uMXIrTbaCX1v0CLE5fNBDC+/2KaVUcuqjxnXaF/H2mt8b1UnrfFfqvZzr7qntjazUpj+/TeKaWhv+HiV893tIUNc3Lh1lrt/zPXi9m4shgT2DqI51BO6tyq280ttHZUf1Yhu6DGojzW9k5pSA3pB77/LdZP3I0Q4tufw1P4ZIb3YtWXR1iLzGck/J/gPBflLFVCkLIiVl68dXhkUf0g41odXVXWqnGpvYXZmT54KPwT1tTYchYFsaw7hOv5mzGHsj5f9/IfKFdK6pzJ6Dlb4OUoOaZqmv2ibWHLaslhLQDLNmdwz9JUaAfgW9/LPd4hZGFFEgVFG/cMLXXCBaSUje+Mx9bCF5UfAKSwIa8AO2b8M/DkfRuEMLlURVJ+2xuIjWZoHP8wTIUWLiI1PUPMA0wx4Fay5LGZZawPZuQHeqfnEsTfcXzepBgsByecyuQUoyiIbIf4GZupxCp3jhSqSwtCdJeUof8v8YIZE5lzV7/CSj9IKMUDVYKJDxJFGFvLuLde6zuUhLfa8J0YI0/86KgrDAuPbNW6OwHbWfccNb73FPrSgSuQYvzExPvDpmKryGbQZ85A2evTEXN5RhExDXJ6XVJK5Q3jPdbhjwRCucIziKae7FvPUH4+qIGo7t/yw2RDhKFZgE+xpUvj0fAv1WrUN7iH8c5XQN704kWIhnok=

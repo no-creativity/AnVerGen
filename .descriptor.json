@@ -23,12 +23,18 @@
                 "gradle-plugin": "org.no_creativity.anvergen:org.no_creativity.anvergen:anvergen"
             }
         ],
-        "gpgSign": false
+        "gpgSign": true
     },
     "files": [
         {
             "includePattern": "build/libs/(.*\\.jar)",
-            "uploadPattern": "org/no_creativity/anvergen/0.2/$1"
+            "uploadPattern": "org/no_creativity/anvergen/0.2/$1",
+            "matrixParams": { "override": 1 }
+        },
+        {
+            "includePattern": "build/pom.xml",
+            "uploadPattern": "org/no_creativity/anvergen/0.2/$1",
+            "matrixParams": { "override": 1 }
         }
     ],
     "publish": true
