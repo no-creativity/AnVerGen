@@ -44,7 +44,7 @@ artifacts {
 }
 
 task writePom << {
-    pomDir = "$buildDir/pom.xml"
+    pomDir = "$buildDir/AnVerGen.pom"
     pom {
         project {
             inceptionYear '2016'
@@ -54,6 +54,19 @@ task writePom << {
                     url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     distribution 'repo'
                 }
+            }
+            developers {
+                developer {
+                    id 'yanqd0'
+                    name 'Yan QiDong'
+                    email 'yanqd0@outlook.com'
+                    url 'https://github.com/yanqd0'
+                    timezone '+8'
+                }
+            }
+            issueManagement {
+                system 'github'
+                url 'https://github.com/no-creativity/AnVerGen/issues'
             }
         }
     }.writeTo(pomDir)
