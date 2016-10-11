@@ -45,6 +45,7 @@ artifacts {
 
 def date = new Date()
 def website = 'https://github.com/no-creativity/AnVerGen'
+def packageDir = 'org/no_creativity/AnVerGen'
 
 task writePom << {
     pomDir = "$buildDir/AnVerGen-${version}.pom"
@@ -103,12 +104,12 @@ task writeDescriptor << {
     root.files = []
     root.files.add([
             'includePattern': 'build/libs/(.*\\.jar)',
-            'uploadPattern': "org/no_creativity/anvergen/$version/\$1",
+            'uploadPattern': "$packageDir/$version/\$1",
             'matrixParams': ['override': 1]
     ])
     root.files.add([
             'includePattern': 'build/(.*\\.pom)',
-            'uploadPattern': "org/no_creativity/anvergen/$version/\$1",
+            'uploadPattern': "$packageDir/$version/\$1",
             'matrixParams': ['override': 1]
     ])
 
