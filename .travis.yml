@@ -6,14 +6,12 @@ jdk:
 
 script: ./gradlew build
 
-after_success: export artifact=`ls $TRAVIS_BUILD_DIR/build/libs/AnVerGen*.jar`
-
-before_deploy: ./gradlew groovydoc
+after_success: export artifacts=`ls build/libs/AnVerGen*.jar`
 
 deploy:
   - provider: releases
     skip_cleanup: true
-    file: $artifact
+    file: $artifacts
     api_key:
       secure: JJ8DSDOYVLz9xTAzlIXP6LJV8ZAcfJ6v/GT2webjD6rBJLeHqImKPMVCpagvp3taiW6rWjezoh99HpWIDxDZIfDZkeWVL70XDuq00+kQ9yYCDlxqDrD/1CksaPKWtlV373Bz3JxWDFsPrzMISA0HTPJWEmT9IfYIFU5uCjwWdoMeEY1HGq7z2rklOFZTUah4nuBHh3Ct6H950hTKZHGODeWqzyB3QqZKf18g37bwn2UYRQpyc/e2z5gqfp2YRz8Br1KWScEsk/iU3qMsvmv9F1M8dxIK8MT3dd33KkUrIvlnXiBwU8DNrk1NLWzZBbN/SotDa81yZvW5hWEYT9f2el98s3cRwXifikKdkcc/u0cxcc3c5PEAagym4OmcDMq++lkWGGBwUy6kzqDj4nhcdeb89kaLrBBxr2pfRu5l9VzJE5hL+qC4z8RqI0tU5QTPd4i6NFy2uBKSVN1pbPuEfGZtCTNe825JhbelluhjLXX4fAibDek3onyajE0D985rkvrWh5H/ZnrExH578D895onSJ5Keo2pCW2LGhcMYMaGdHI65r8RqBsZHbLDGOtLlFJ47reAAsy6fSCYppzi3pROQTRwkkvml/660vLi6WrgLtRQJv80UFn0k5DRGeT/oZf85srSZglC3KdJtTKjwV9h4a+X8qzCTcrURbQo7HfY=
     on:
@@ -21,7 +19,7 @@ deploy:
       jdk: oraclejdk8
   - provider: bintray
     skip_cleanup: true
-    file: ".descriptor.json"
+    file: "build/descriptor.json"
     user: yanqd0
     on:
       jdk: oraclejdk8
