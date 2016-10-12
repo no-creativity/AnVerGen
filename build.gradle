@@ -1,10 +1,9 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.github.no-creativity:AnVerGen:0.2'
+        classpath 'org.no_creativity:AnVerGen:0.2.12'
     }
 }
 
