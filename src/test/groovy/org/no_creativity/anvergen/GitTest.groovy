@@ -64,7 +64,7 @@ public class GitTest {
     }
 
     @Test
-    public void getLastTag() throws Exception {
+    public void getLatestTag() throws Exception {
         def tag = Git.getLatestTag()
         assertNotNull(tag)
         assertFalse(tag.trim().isEmpty())
@@ -74,6 +74,7 @@ public class GitTest {
         def process = cmd.execute()
         process.waitFor()
         def t = process.getText().trim()
+
         if (t.isEmpty()) {
             assertEquals(Git.DEFAULT_TAG, tag)
         } else {

@@ -35,7 +35,6 @@ public class Git {
      * This is the return of {@link #getLatestTag()} if there is no git tag yet.
      */
     public final static String DEFAULT_TAG = "0.0"
-    private static def tag = DEFAULT_TAG
 
     private Git() {
         throw new UnsupportedOperationException("This class should never be instantiated!")
@@ -69,14 +68,14 @@ public class Git {
      * @see #DEFAULT_TAG
      */
     public static String getLatestTag() {
-        if (!DEFAULT_TAG.equals(tag)) {
-            return tag
-        }
-
         def cmd = "git for-each-ref --sort=-taggerdate --count=1 --format %(tag) refs/tags"
         def process = cmd.execute()
         process.waitFor()
-        tag = process.getText().trim()
+        def tag = process.getText().trim()
+
+        if (tag.isEmpty()) {
+            tag = DEFAULT_TAG
+        }
 
         return tag
     }
