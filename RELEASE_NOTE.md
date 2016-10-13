@@ -1,6 +1,20 @@
 RELEASE NOTE
 ============
 
+Release version: 0.3
+------------------------
+
+### Description
+
+It is a stable release with major functions.
+
+### Change log
+
+- Add badges of Bintray, JitPack and codecov.
+- Enhance the `build.gradle`.
+- Bootstrap itself.
+- Enhance the test cases.
+
 Release version: 0.2
 ------------------------
 

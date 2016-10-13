@@ -41,7 +41,7 @@ buildscript {
         // maven { url "https://dl.bintray.com/no-creativity/maven" }
     }
     dependencies {
-        classpath 'org.no_creativity:AnVerGen:0.2.11'
+        classpath 'org.no_creativity:AnVerGen:0.3.0'
     }
 }
 ```
@@ -55,7 +55,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.github.no-creativity:AnVerGen:0.2'
+        classpath 'com.github.no-creativity:AnVerGen:0.3'
     }
 }
 ```
@@ -77,12 +77,14 @@ android {
 
 ## Change request
 
-If there is any new demand or problem of this JAR, give me a [issue](https://github.com/no-creativity/AnVerGen/issues).
+If there is any new demand or problem of this JAR, please give me an [issue](https://github.com/no-creativity/AnVerGen/issues).
+
+Or you can fork and distribute it.
 
 ## License
 
 >  Copyright 2016 Yan QiDong
 >
->  Licensed under the Apache License, Version 2.0 .
+>  Licensed under the Apache License, Version 2.0
 >
 >  See: <http://www.apache.org/licenses/LICENSE-2.0>
