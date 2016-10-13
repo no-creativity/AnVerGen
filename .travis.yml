@@ -2,9 +2,7 @@ language: groovy
 
 sudo: false
 
-jdk:
-  - oraclejdk8
-  - openjdk7
+jdk: oraclejdk8
 
 script: ./gradlew build
 

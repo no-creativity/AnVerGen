@@ -28,6 +28,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+allprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.6
+}
+
 jacocoTestReport {
     reports {
         xml.enabled = true
@@ -111,13 +116,13 @@ task writeDescriptor << {
     root.files = []
     root.files.add([
             'includePattern': 'build/libs/(.*\\.jar)',
-            'uploadPattern': "$packageDir/$version/\$1",
-            'matrixParams': ['override': 1]
+            'uploadPattern' : "$packageDir/$version/\$1",
+            'matrixParams'  : ['override': 1]
     ])
     root.files.add([
             'includePattern': 'build/(.*\\.pom)',
-            'uploadPattern': "$packageDir/$version/\$1",
-            'matrixParams': ['override': 1]
+            'uploadPattern' : "$packageDir/$version/\$1",
+            'matrixParams'  : ['override': 1]
     ])
 
     def jsonFile = new File("$buildDir/descriptor.json")
