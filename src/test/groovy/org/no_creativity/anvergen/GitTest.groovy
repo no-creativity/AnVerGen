@@ -18,14 +18,22 @@ package org.no_creativity.anvergen
 
 import org.junit.Test
 
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertFalse
-import static org.junit.Assert.assertNotNull
+import static org.junit.Assert.*
 
 /**
  * @author yanqd0
  */
 public class GitTest {
+    @Test
+    public void constructor() throws Exception {
+        try {
+            Git.class.newInstance()
+        } catch (UnsupportedOperationException ignored) {
+            return
+        }
+        fail()
+    }
+
     /**
      * @see Git#calculateCommitCount()
      */

@@ -78,10 +78,6 @@ public class Git {
         process.waitFor()
         tag = process.getText().trim()
 
-        if (tag.isEmpty()) {
-            tag = DEFAULT_TAG
-        }
-
         return tag
     }
 
