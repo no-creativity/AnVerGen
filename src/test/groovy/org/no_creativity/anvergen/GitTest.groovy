@@ -25,9 +25,9 @@ import static org.junit.Assert.*
  */
 public class GitTest {
     @Test
-    public void constructor() throws Exception {
+    public void testConstructor() throws Exception {
         try {
-            Git.class.newInstance()
+            Git.newInstance()
         } catch (UnsupportedOperationException ignored) {
             return
         }

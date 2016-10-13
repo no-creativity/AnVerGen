@@ -27,10 +27,7 @@ import static org.junit.Assert.assertTrue
 class VerTest {
     @Test
     public void testGenerateVersionCode() throws Exception {
-        Process process = "git rev-list --count HEAD".execute()
-        process.waitFor()
-        int commits = process.getText().toInteger()
-
+        def commits = Git.calculateCommitCount()
         assertEquals(commits, Ver.generateVersionCode())
         assertEquals(commits, Ver.generateVersionCode())
     }
