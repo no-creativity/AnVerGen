@@ -75,6 +75,8 @@ android {
 }
 ```
 
+You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/0.3/javadoc/) for more usage.
+
 ## Change request
 
 If there is any new demand or problem of this JAR, please give me an [issue](https://github.com/no-creativity/AnVerGen/issues).
