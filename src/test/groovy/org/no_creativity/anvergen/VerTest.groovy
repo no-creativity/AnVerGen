@@ -29,14 +29,14 @@ class VerTest {
     public void testGenerateVersionCode() throws Exception {
         def commits = Git.calculateCommitCount()
         assertEquals(commits, Ver.generateVersionCode())
-        assertEquals(commits, Ver.generateVersionCode())
+        assertEquals(Ver.generateVersionCode(), commits)
     }
 
     @Test
     public void testGenerateVersionName() throws Exception {
         String name = Ver.generateVersionName()
         assertTrue(name.startsWith(Git.getLatestTag()))
-        assertTrue(name.contains(new Date().format("yyMMdd")))
+        assertTrue(name.contains(Git.getCommitDate().format("yyMMdd")))
         assertTrue(name.endsWith(Git.getShortSha1()))
     }
 }

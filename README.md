@@ -20,8 +20,8 @@ The version code will be the commit count of git, and the version name will be a
 ```
 
 - `version` is the latest `git tag`. It is recommended to name the git tag like 0.1, 1.0 and so on.
-- `subVersion` is the commit count from last `git tag`. If the current git head is the tag, then the count is 0.
-- `date` is the date of the compilation, formatted as `yyMMdd`.
+- `subVersion` is the commit count from the latest `git tag`. If the current git head is the tag, then the count is 0.
+- `date` is the date of the latest commit, formatted as `yyMMdd`.
 - `shortSha1` is a substring of SHA1 of current git object.
 
 Finally, the version name is something like `0.2.14.161013.fcc3088`. `0.2` is the latest git tag. `14` is the commit count from tag `0.2`.
