@@ -90,4 +90,17 @@ public class Git {
         process.waitFor()
         return process.getText().substring(0, 7)
     }
+
+    /**
+     * The date of commit is useful in versions.
+     *
+     * @param commit The git commit to query. The default is "HEAD".
+     * @return The {@link Date} of the specified commit.
+     */
+    public static Date getCommitDate(String commit = '') {
+        def process = "git log -1 --format=%ct $commit".execute()
+        process.waitFor()
+        long utc = process.getText().toLong() * 1000
+        return new Date(utc)
+    }
 }

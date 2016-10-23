@@ -91,4 +91,10 @@ public class GitTest {
         def shortSha1 = description.substring(length - 8, length).trim()
         assertEquals(shortSha1, Git.getShortSha1())
     }
+
+    @Test
+    public void getCommitDate() throws Exception {
+        assertEquals(Git.getCommitDate(), Git.getCommitDate('HEAD'))
+        assertEquals(new Date(1476411953000), Git.getCommitDate('0.3'))
+    }
 }
