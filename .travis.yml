@@ -4,9 +4,6 @@ sudo: false
 
 jdk: oraclejdk8
 
-addons:
-  srcclr: true
-
 script: ./gradlew build
 
 after_success:
