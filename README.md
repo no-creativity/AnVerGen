@@ -4,6 +4,7 @@
 [![Download](https://api.bintray.com/packages/no-creativity/maven/AnVerGen/images/download.svg)](https://bintray.com/no-creativity/maven/AnVerGen/_latestVersion)
 [![JitPack](https://jitpack.io/v/no-creativity/AnVerGen.svg)](https://jitpack.io/#no-creativity/AnVerGen)
 [![codecov](https://codecov.io/gh/no-creativity/AnVerGen/branch/master/graph/badge.svg)](https://codecov.io/gh/no-creativity/AnVerGen)
+[![Dependency Status](https://www.versioneye.com/user/projects/580c87b9912815139a3d0520/badge.svg)](https://www.versioneye.com/user/projects/580c87b9912815139a3d0520)
 
 An automatic version generator for Android applications, implemented by Groovy.
 
