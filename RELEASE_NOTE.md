@@ -1,6 +1,18 @@
 RELEASE NOTE
 ============
 
+Release version: 0.4
+------------------------
+
+### Description
+
+Change the date in the version name from compilation to latest commit.
+
+### Change log
+
+- Add `getCommitDate()` into `Git`.
+- Change the date in `generateVersionName()`
+
 Release version: 0.3
 ------------------------
 
