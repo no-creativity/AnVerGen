@@ -1,4 +1,5 @@
 /*
+ * AnVerGen - Android Version Generator
  * Copyright 2016 Yan QiDong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
