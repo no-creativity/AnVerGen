@@ -1,6 +1,11 @@
 RELEASE NOTE
 ============
 
+Release version: 0.5
+------------------------
+
+Fix a bug when no previous tag.
+
 Release version: 0.4
 ------------------------
 

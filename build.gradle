@@ -77,7 +77,7 @@ def website = 'https://github.com/no-creativity/AnVerGen'
 def packageDir = "${group.replace('.', '/')}/${project.name}"
 
 task writePom << {
-    pomDir = "$buildDir/AnVerGen-${version}.pom"
+    pomDir = "$buildDir/${project.name}-${version}.pom"
     pom {
         project {
             inceptionYear date.format('yyyy')
@@ -109,7 +109,7 @@ task writeDescriptor << {
     def builder = new JsonBuilder()
     def root = builder {
         'package' {
-            name 'AnVerGen'
+            name project.name
             repo 'maven'
             subject 'no-creativity'
             desc 'An automatic version generator for Android applications.'
