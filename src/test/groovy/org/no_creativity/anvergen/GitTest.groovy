@@ -50,7 +50,9 @@ public class GitTest {
      */
     @Test
     public void getCommitCount1() throws Exception {
-        assertEquals(Git.calculateCommitCount(), Git.calculateCommitCount(""))
+        def count = Git.calculateCommitCount()
+        assertEquals(count, Git.calculateCommitCount(' '))
+        assertEquals(count, Git.calculateCommitCount(Git.DEFAULT_TAG))
         assertEquals(0, Git.calculateCommitCount("HEAD"))
         assertEquals(1, Git.calculateCommitCount("HEAD^"))
     }

@@ -27,9 +27,8 @@ import static org.junit.Assert.assertTrue
 class VerTest {
     @Test
     public void testGenerateVersionCode() throws Exception {
-        def commits = Git.calculateCommitCount()
         def code = Ver.generateVersionCode()
-        assertEquals(commits, code)
+        assertEquals(Git.calculateCommitCount('', 'HEAD'), code)
         assertTrue(code > 0)
         assertEquals(code, Ver.generateVersionCode())
     }
