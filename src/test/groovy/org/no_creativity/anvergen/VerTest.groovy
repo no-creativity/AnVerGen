@@ -28,8 +28,10 @@ class VerTest {
     @Test
     public void testGenerateVersionCode() throws Exception {
         def commits = Git.calculateCommitCount()
-        assertEquals(commits, Ver.generateVersionCode())
-        assertEquals(Ver.generateVersionCode(), commits)
+        def code = Ver.generateVersionCode()
+        assertEquals(commits, code)
+        assertTrue(code > 0)
+        assertEquals(code, Ver.generateVersionCode())
     }
 
     @Test
