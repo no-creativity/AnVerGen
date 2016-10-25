@@ -51,7 +51,7 @@ public class Git {
      */
     public static int calculateCommitCount(String from = null, String to = "HEAD") {
         String cmd
-        if (from == null || from.trim().isEmpty()) {
+        if (from == null || from.trim().isEmpty() || from.equals(DEFAULT_TAG)) {
             cmd = "git rev-list --count $to"
         } else {
             cmd = "git rev-list --count $from...$to"
