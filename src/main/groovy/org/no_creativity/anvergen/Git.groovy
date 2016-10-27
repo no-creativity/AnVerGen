@@ -78,17 +78,28 @@ public class Git {
      * @see #DEFAULT_TAG
      */
     @TypeChecked
-    public static String getLatestTag() {
-        def cmd = "git for-each-ref --sort=-taggerdate --count=1 --format %(tag) refs/tags"
+    public static String getLatestTag(String commit = 'HEAD') throws IllegalArgumentException {
+        def describe = getGitDescribe(commit)
+        def sha1_7 = getShortSha1(7, commit)
+        if (describe.contains("-g$sha1_7")) {
+            def position = describe.lastIndexOf('-')
+            describe = describe.substring(0, position)
+            position = describe.lastIndexOf('-')
+            return describe.substring(0, position)
+        } else if (!sha1_7.equals(describe)) {
+            return describe
+        } else {
+            return DEFAULT_TAG
+        }
+    }
+
+    @TypeChecked
+    public static String getGitDescribe(String commit = 'HEAD') throws IllegalArgumentException {
+        def cmd = "git describe --always --tags $commit"
         def process = cmd.execute()
         process.waitFor()
-        def tag = process.getText().trim()
-
-        if (tag.isEmpty()) {
-            tag = DEFAULT_TAG
-        }
-
-        return tag
+        checkResultOrThrow(process, "The commit $commit is not found!")
+        return process.getText().trim()
     }
 
     /**
@@ -111,7 +122,7 @@ public class Git {
         def process = "git rev-parse $commit".execute()
         process.waitFor()
         checkResultOrThrow(process, "The commit $commit is not found!")
-        return process.getText().substring(0, length)
+        return process.getText().trim().substring(0, length)
     }
 
     /**

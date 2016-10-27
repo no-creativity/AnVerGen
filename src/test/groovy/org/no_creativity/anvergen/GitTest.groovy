@@ -96,23 +96,62 @@ class GitTest {
         def cmd = "git for-each-ref --sort=-taggerdate --count=1 --format %(tag) refs/tags"
         def process = cmd.execute()
         process.waitFor()
-        def t = process.getText().trim()
+        assertEquals(process.getText().trim(), tag)
+    }
 
-        if (t.isEmpty()) {
-            assertEquals(Git.DEFAULT_TAG, tag)
-        } else {
-            assertEquals(t, tag)
+    @Test
+    public void getLatestTag1() throws Exception {
+        assertEquals('0.1', Git.getLatestTag('0.1'))
+        assertEquals('0.1', Git.getLatestTag('0.2^'))
+        assertEquals(Git.DEFAULT_TAG, Git.getLatestTag('0.1^'))
+
+        try {
+            Git.getLatestTag(INVALID_COMMIT)
+            fail()
+        } catch (IllegalArgumentException ignored) {
         }
     }
 
     @Test
-    public void getShortSha1() throws Exception {
+    public void getGitDescribe() throws Exception {
+        def describe = Git.getGitDescribe()
+        def splits = describe.split('-')
+        def tag = Git.getLatestTag()
+        assertEquals(tag, splits[0])
+        assertEquals(Git.calculateCommitCount(tag), splits[1].toInteger())
+        assertEquals(Git.getShortSha1(), splits[2].substring(1))
+    }
+
+    @Test
+    public void getGitDescribe1() throws Exception {
+        assertEquals('0.2', Git.getGitDescribe('0.2'))
+        assertEquals('0.1-13-g878ab83', Git.getGitDescribe('0.2^'))
+        assertEquals('e69aa71', Git.getGitDescribe('0.1^'))
+
+        try {
+            Git.getGitDescribe(INVALID_COMMIT)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
+    public void getShortSha1_0() throws Exception {
         def process = "git describe --long".execute()
         process.waitFor()
         def description = process.getText()
         def length = description.length()
         def shortSha1 = description.substring(length - 8, length).trim()
         assertEquals(shortSha1, Git.getShortSha1())
+    }
+
+    @Test
+    public void getShortSha1_1() throws Exception {
+        def process = "git rev-parse HEAD".execute()
+        process.waitFor()
+        def sha1_40 = process.getText().trim()
+        assertEquals(sha1_40, Git.getShortSha1(40))
+        assertEquals(sha1_40.substring(0, 9), Git.getShortSha1(9))
 
         for (int i in [0, 41, Integer.MIN_VALUE, Integer.MAX_VALUE]) {
             try {
@@ -128,6 +167,10 @@ class GitTest {
                 fail()
             }
         }
+    }
+
+    @Test
+    public void getShortSha1_2() throws Exception {
         try {
             Git.getShortSha1(7, INVALID_COMMIT)
             fail()
