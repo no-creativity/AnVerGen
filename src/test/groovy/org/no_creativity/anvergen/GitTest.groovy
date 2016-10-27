@@ -24,7 +24,7 @@ import static org.junit.Assert.*
  * @author yanqd0
  */
 class GitTest {
-    private static final def INVALID_COMMIT = "I_am_not_a_valid_commit"
+    protected static final def INVALID_COMMIT = "I_am_not_a_valid_commit"
 
     @Test
     public void testConstructor() throws Exception {
@@ -58,10 +58,8 @@ class GitTest {
         assertEquals(0, Git.calculateCommitCount("HEAD"))
         assertEquals(1, Git.calculateCommitCount("HEAD^"))
 
-        try {
+        testIllegalArgumentException {
             Git.calculateCommitCount(INVALID_COMMIT)
-            fail()
-        } catch (IllegalArgumentException ignored) {
         }
     }
 
@@ -83,10 +81,8 @@ class GitTest {
                 [INVALID_COMMIT, INVALID_COMMIT],
         ]
         for (String[] commits in INVALID_PAIRS) {
-            try {
+            testIllegalArgumentException {
                 Git.calculateCommitCount(commits[0], commits[1])
-                fail()
-            } catch (IllegalArgumentException ignored) {
             }
         }
     }
@@ -111,10 +107,8 @@ class GitTest {
         assertEquals('0.1', Git.getLatestTag('0.2^'))
         assertEquals(Git.DEFAULT_TAG, Git.getLatestTag('0.1^'))
 
-        try {
+        testIllegalArgumentException {
             Git.getLatestTag(INVALID_COMMIT)
-            fail()
-        } catch (IllegalArgumentException ignored) {
         }
     }
 
@@ -134,10 +128,8 @@ class GitTest {
         assertEquals('0.1-13-g878ab83', Git.getGitDescribe('0.2^'))
         assertEquals('e69aa71', Git.getGitDescribe('0.1^'))
 
-        try {
+        testIllegalArgumentException {
             Git.getGitDescribe(INVALID_COMMIT)
-            fail()
-        } catch (IllegalArgumentException ignored) {
         }
     }
 
@@ -159,15 +151,26 @@ class GitTest {
         assertEquals(sha1_40, Git.getShortSha1(40))
         assertEquals(sha1_40.substring(0, 9), Git.getShortSha1(9))
 
-        testLength { int i -> Git.getShortSha1(i) }
+        testLength {
+            int i -> Git.getShortSha1(i)
+        }
+    }
+
+    @Test
+    public void getShortSha1_2() throws Exception {
+        testLength {
+            int i -> Git.getShortSha1(i, '0.5')
+        }
+
+        testIllegalArgumentException {
+            Git.getShortSha1(7, INVALID_COMMIT)
+        }
     }
 
     private static void testLength(Closure closure) {
         for (int i in [0, 41, Integer.MIN_VALUE, Integer.MAX_VALUE]) {
-            try {
+            testIllegalArgumentException {
                 closure(i)
-                fail()
-            } catch (IllegalArgumentException ignored) {
             }
         }
         for (int i in [1, 7, 40]) {
@@ -180,25 +183,20 @@ class GitTest {
     }
 
     @Test
-    public void getShortSha1_2() throws Exception {
-        testLength { int i -> Git.getShortSha1(i, '0.5') }
-
-        try {
-            Git.getShortSha1(7, INVALID_COMMIT)
-            fail()
-        } catch (IllegalArgumentException ignored) {
-        }
-    }
-
-    @Test
     public void getCommitDate() throws Exception {
         assertEquals(Git.getCommitDate(), Git.getCommitDate('HEAD'))
         assertEquals(new Date(1476411953000), Git.getCommitDate('0.3'))
 
-        try {
+        testIllegalArgumentException {
             Git.getCommitDate(INVALID_COMMIT)
+        }
+    }
+
+    protected static void testIllegalArgumentException(Closure closure) {
+        try {
+            closure()
             fail()
-        } catch (IllegalArgumentException ignored) {
+        } catch (IllegalArgumentException ignore) {
         }
     }
 }

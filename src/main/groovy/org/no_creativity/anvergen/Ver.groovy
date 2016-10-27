@@ -17,6 +17,8 @@
 
 package org.no_creativity.anvergen
 
+import static org.no_creativity.anvergen.Git.DEFAULT_TAG
+
 /**
  * This is a simply version generator for Android applications.
  * <p>
@@ -30,8 +32,9 @@ public class Ver {
      *
      * @return The number of commits in git history.
      */
-    public static int generateVersionCode() {
-        return Git.calculateCommitCount()
+    public static int generateVersionCode(String commit = 'HEAD')
+            throws IllegalArgumentException {
+        return Git.calculateCommitCount(null, commit)
     }
 
     /**
@@ -39,13 +42,14 @@ public class Ver {
      *
      * @return The formatted String with git and time information.
      */
-    public static String generateVersionName() {
-        def describe = Git.getGitDescribe()
-        def tag = Git.getLatestTag()
-        if (describe.startsWith(tag)) {
+    public static String generateVersionName(String commit = 'HEAD')
+            throws IllegalArgumentException {
+        def describe = Git.getGitDescribe(commit)
+        def tag = Git.getLatestTag(commit)
+        if (!tag.equals(DEFAULT_TAG)) {
             return describe
         } else {
-            return "${Git.DEFAULT_TAG}-${Git.calculateCommitCount()}-g$describe"
+            return "${DEFAULT_TAG}-${Git.calculateCommitCount(null, commit)}-g$describe"
         }
     }
 }
