@@ -23,7 +23,9 @@ import static org.junit.Assert.*
 /**
  * @author yanqd0
  */
-public class GitTest {
+class GitTest {
+    private static final def INVALID_COMMIT = "I_am_not_a_valid_commit"
+
     @Test
     public void testConstructor() throws Exception {
         try {
@@ -63,6 +65,17 @@ public class GitTest {
     @Test
     public void getCommitCount2() throws Exception {
         assertEquals(2, Git.calculateCommitCount("HEAD~3", "HEAD^"))
+
+        try {
+            Git.calculateCommitCount(INVALID_COMMIT, 'HEAD')
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
+        try {
+            Git.calculateCommitCount('HEAD', INVALID_COMMIT)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     @Test
@@ -92,11 +105,33 @@ public class GitTest {
         def length = description.length()
         def shortSha1 = description.substring(length - 8, length).trim()
         assertEquals(shortSha1, Git.getShortSha1())
+
+        try {
+            Git.getShortSha1(0)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
+        try {
+            Git.getShortSha1(41)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
+        try {
+            Git.getShortSha1(7, INVALID_COMMIT)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     @Test
     public void getCommitDate() throws Exception {
         assertEquals(Git.getCommitDate(), Git.getCommitDate('HEAD'))
         assertEquals(new Date(1476411953000), Git.getCommitDate('0.3'))
+
+        try {
+            Git.getCommitDate(INVALID_COMMIT)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 }

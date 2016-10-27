@@ -17,6 +17,8 @@
 
 package org.no_creativity.anvergen
 
+import groovy.transform.TypeChecked
+
 /**
  * This is a subset wrapper of Git.
  * <p>
@@ -34,6 +36,8 @@ package org.no_creativity.anvergen
 public class Git {
     /**
      * This is the return of {@link #getLatestTag()} if there is no git tag yet.
+     * <p>
+     * The default is <code>"0.0"</code>.
      */
     public final static String DEFAULT_TAG = "0.0"
 
@@ -45,20 +49,25 @@ public class Git {
      * This method calculates the number of commit(s) in the specific list.
      * If <code>from</code> is <code>null</code>, the list is the whole git history.
      *
-     * @param from The start of the commit list to be count. The default is <code>null</code>.
-     * @param to The end of the commit list to be count. The default is "HEAD".
+     * @param from The start of the commit list to be count.
+     * @param to The end of the commit list to be count.
      * @return The commit count between <code>from</code> and <code>to</code>.
+     * @throws IllegalArgumentException When <code>from</code> or <code>to</code> is not valid.
      */
-    public static int calculateCommitCount(String from = null, String to = "HEAD") {
-        String cmd
-        if (from == null || from.trim().isEmpty() || from.equals(DEFAULT_TAG)) {
-            cmd = "git rev-list --count $to"
-        } else {
-            cmd = "git rev-list --count $from...$to"
+    @TypeChecked
+    public static int calculateCommitCount(String from = null, String to = "HEAD")
+            throws IllegalArgumentException {
+        Closure cmd = {
+            if (from == null || from.trim().isEmpty() || from.equals(DEFAULT_TAG)) {
+                "git rev-list --count $to"
+            } else {
+                "git rev-list --count $from...$to"
+            }
         }
 
-        def process = cmd.execute()
+        def process = cmd().execute()
         process.waitFor()
+        checkResultOrThrow(process, "Is the $from or $to valid commit?")
         return process.getText().toInteger()
     }
 
@@ -68,6 +77,7 @@ public class Git {
      * @return The latest git tag.
      * @see #DEFAULT_TAG
      */
+    @TypeChecked
     public static String getLatestTag() {
         def cmd = "git for-each-ref --sort=-taggerdate --count=1 --format %(tag) refs/tags"
         def process = cmd.execute()
@@ -82,26 +92,48 @@ public class Git {
     }
 
     /**
-     * It's the same as the end of <code>git describe --always</code>.
+     * To query the specified SHA1 with a specified length.
      *
+     * @param length The length of the SHA1 to be returned.
+     * @param commit The position where you want SHA1.
      * @return The short SHA1 as the commit description.
+     * @throws IllegalArgumentException When the <code>commit</code> is not valid,
+     * or the <code>length</code> is not appropriate.
      */
-    public static String getShortSha1() {
-        def process = "git rev-parse HEAD".execute()
+    @TypeChecked
+    public static String getShortSha1(int length = 7, String commit = 'HEAD')
+            throws IllegalArgumentException {
+        if (length <= 0 || length > 40) {
+            throw new IllegalArgumentException("The length is $length, which should be " +
+                    "smaller then 40 and bigger then 0!")
+        }
+
+        def process = "git rev-parse $commit".execute()
         process.waitFor()
-        return process.getText().substring(0, 7)
+        checkResultOrThrow(process, "The commit $commit is not found!")
+        return process.getText().substring(0, length)
     }
 
     /**
-     * The date of commit is useful in versions.
+     * The date of commit may be useful in versions.
      *
-     * @param commit The git commit to query. The default is "HEAD".
+     * @param commit The git commit to query.
      * @return The {@link Date} of the specified commit.
+     * @throws IllegalArgumentException When the <code>commit</code> is not valid.
      */
-    public static Date getCommitDate(String commit = '') {
+    @TypeChecked
+    public static Date getCommitDate(String commit = 'HEAD') throws IllegalArgumentException {
         def process = "git log -1 --format=%ct $commit".execute()
         process.waitFor()
+        checkResultOrThrow(process, "The commit $commit is not found!")
         long utc = process.getText().toLong() * 1000
         return new Date(utc)
+    }
+
+    @TypeChecked
+    private static void checkResultOrThrow(Process process, String msg) {
+        if (process.exitValue() != 0) {
+            throw new IllegalArgumentException(msg)
+        }
     }
 }
