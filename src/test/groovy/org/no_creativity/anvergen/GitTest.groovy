@@ -30,10 +30,9 @@ class GitTest {
     public void testConstructor() throws Exception {
         try {
             Git.newInstance()
+            fail()
         } catch (UnsupportedOperationException ignored) {
-            return
         }
-        fail()
     }
 
     /**
@@ -53,6 +52,7 @@ class GitTest {
     @Test
     public void getCommitCount1() throws Exception {
         def count = Git.calculateCommitCount()
+        assertEquals(count, Git.calculateCommitCount(null))
         assertEquals(count, Git.calculateCommitCount(' '))
         assertEquals(count, Git.calculateCommitCount(Git.DEFAULT_TAG))
         assertEquals(0, Git.calculateCommitCount("HEAD"))
@@ -70,7 +70,12 @@ class GitTest {
      */
     @Test
     public void getCommitCount2() throws Exception {
+        def count = Git.calculateCommitCount()
+        assertEquals(count - 1, Git.calculateCommitCount(null, 'HEAD^'))
+        assertEquals(count - 1, Git.calculateCommitCount(' ', 'HEAD^'))
+        assertEquals(count - 1, Git.calculateCommitCount(Git.DEFAULT_TAG, 'HEAD^'))
         assertEquals(2, Git.calculateCommitCount("HEAD~3", "HEAD^"))
+        assertEquals(0, Git.calculateCommitCount("HEAD~3", "HEAD~3"))
 
         final String[] INVALID_PAIRS = [
                 ['HEAD', INVALID_COMMIT],
@@ -101,6 +106,7 @@ class GitTest {
 
     @Test
     public void getLatestTag1() throws Exception {
+        assertEquals(Git.getLatestTag(), Git.getLatestTag('HEAD'))
         assertEquals('0.1', Git.getLatestTag('0.1'))
         assertEquals('0.1', Git.getLatestTag('0.2^'))
         assertEquals(Git.DEFAULT_TAG, Git.getLatestTag('0.1^'))
@@ -153,16 +159,20 @@ class GitTest {
         assertEquals(sha1_40, Git.getShortSha1(40))
         assertEquals(sha1_40.substring(0, 9), Git.getShortSha1(9))
 
+        testLength { int i -> Git.getShortSha1(i) }
+    }
+
+    private static void testLength(Closure closure) {
         for (int i in [0, 41, Integer.MIN_VALUE, Integer.MAX_VALUE]) {
             try {
-                Git.getShortSha1(i)
+                closure(i)
                 fail()
             } catch (IllegalArgumentException ignored) {
             }
         }
         for (int i in [1, 7, 40]) {
             try {
-                Git.getShortSha1(i)
+                closure(i)
             } catch (IllegalArgumentException ignored) {
                 fail()
             }
@@ -171,6 +181,8 @@ class GitTest {
 
     @Test
     public void getShortSha1_2() throws Exception {
+        testLength { int i -> Git.getShortSha1(i, '0.5') }
+
         try {
             Git.getShortSha1(7, INVALID_COMMIT)
             fail()
