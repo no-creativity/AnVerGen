@@ -37,7 +37,5 @@ class VerTest {
     public void testGenerateVersionName() throws Exception {
         String name = Ver.generateVersionName()
         assertTrue(name.startsWith(Git.getLatestTag()))
-        assertTrue(name.contains(Git.getCommitDate().format("yyMMdd")))
-        assertTrue(name.endsWith(Git.getShortSha1()))
     }
 }

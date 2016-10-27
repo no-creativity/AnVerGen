@@ -35,25 +35,17 @@ public class Ver {
     }
 
     /**
-     * The versionName is set to "$version.$subVersion.$date.$shortSha1".
-     *
-     * <ul>
-     * <li><code>$version</code> is the last git tag. If there is no git tag,
-     * it is {@link Git#DEFAULT_TAG}.</li>
-     * <li><code>$subVersion</code> is the commit count from last git tag.</li>
-     * <li><code>$date</code> is the formatted UTC time of the latest commit.</li>
-     * <li><code>$shortSha1</code> is a substring of SHA1 of current git object.</li>
-     * </ul>
-     *
-     * For example: 0.1.9.161001.fe247f2
+     * The versionName is set to the result of <code>git describe</code>.
      *
      * @return The formatted String with git and time information.
      */
     public static String generateVersionName() {
-        def version = Git.getLatestTag()
-        def subVersion = Git.calculateCommitCount(version)
-        String date = Git.getCommitDate().format("yyMMdd")
-        String shortSha1 = Git.getShortSha1()
-        return "$version.$subVersion.$date.$shortSha1"
+        def describe = Git.getGitDescribe()
+        def tag = Git.getLatestTag()
+        if (describe.startsWith(tag)) {
+            return describe
+        } else {
+            return "${Git.DEFAULT_TAG}-${Git.calculateCommitCount()}-g$describe"
+        }
     }
 }
