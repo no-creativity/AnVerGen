@@ -57,6 +57,12 @@ class GitTest {
         assertEquals(count, Git.calculateCommitCount(Git.DEFAULT_TAG))
         assertEquals(0, Git.calculateCommitCount("HEAD"))
         assertEquals(1, Git.calculateCommitCount("HEAD^"))
+
+        try {
+            Git.calculateCommitCount(INVALID_COMMIT)
+            fail()
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     /**
@@ -66,15 +72,17 @@ class GitTest {
     public void getCommitCount2() throws Exception {
         assertEquals(2, Git.calculateCommitCount("HEAD~3", "HEAD^"))
 
-        try {
-            Git.calculateCommitCount(INVALID_COMMIT, 'HEAD')
-            fail()
-        } catch (IllegalArgumentException ignored) {
-        }
-        try {
-            Git.calculateCommitCount('HEAD', INVALID_COMMIT)
-            fail()
-        } catch (IllegalArgumentException ignored) {
+        final String[] INVALID_PAIRS = [
+                ['HEAD', INVALID_COMMIT],
+                [INVALID_COMMIT, 'HEAD'],
+                [INVALID_COMMIT, INVALID_COMMIT],
+        ]
+        for (String[] commits in INVALID_PAIRS) {
+            try {
+                Git.calculateCommitCount(commits[0], commits[1])
+                fail()
+            } catch (IllegalArgumentException ignored) {
+            }
         }
     }
 
@@ -106,15 +114,19 @@ class GitTest {
         def shortSha1 = description.substring(length - 8, length).trim()
         assertEquals(shortSha1, Git.getShortSha1())
 
-        try {
-            Git.getShortSha1(0)
-            fail()
-        } catch (IllegalArgumentException ignored) {
+        for (int i in [0, 41, Integer.MIN_VALUE, Integer.MAX_VALUE]) {
+            try {
+                Git.getShortSha1(i)
+                fail()
+            } catch (IllegalArgumentException ignored) {
+            }
         }
-        try {
-            Git.getShortSha1(41)
-            fail()
-        } catch (IllegalArgumentException ignored) {
+        for (int i in [1, 7, 40]) {
+            try {
+                Git.getShortSha1(i)
+            } catch (IllegalArgumentException ignored) {
+                fail()
+            }
         }
         try {
             Git.getShortSha1(7, INVALID_COMMIT)
