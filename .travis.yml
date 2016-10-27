@@ -10,6 +10,8 @@ after_success:
   - ./gradlew jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
 
+after_fail: cat build/test-results/*.xml
+
 deploy:
   - provider: releases
     skip_cleanup: true
