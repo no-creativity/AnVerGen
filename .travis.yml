@@ -4,6 +4,8 @@ sudo: false
 
 jdk: oraclejdk8
 
+before_script: git pull --tags
+
 script: ./gradlew build
 
 after_success:
