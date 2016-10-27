@@ -17,6 +17,7 @@
 
 package org.no_creativity.anvergen
 
+import com.sun.istack.internal.NotNull
 import groovy.transform.TypeChecked
 
 /**
@@ -77,6 +78,7 @@ public class Git {
      * @return The latest git tag.
      * @see #DEFAULT_TAG
      */
+    @NotNull
     @TypeChecked
     public static String getLatestTag(String commit = 'HEAD') throws IllegalArgumentException {
         def describe = getGitDescribe(commit)
@@ -93,6 +95,7 @@ public class Git {
         }
     }
 
+    @NotNull
     @TypeChecked
     public static String getGitDescribe(String commit = 'HEAD') throws IllegalArgumentException {
         def cmd = "git describe --always --tags $commit"
@@ -111,6 +114,7 @@ public class Git {
      * @throws IllegalArgumentException When the <code>commit</code> is not valid,
      * or the <code>length</code> is not appropriate.
      */
+    @NotNull
     @TypeChecked
     public static String getShortSha1(int length = 7, String commit = 'HEAD')
             throws IllegalArgumentException {
@@ -132,6 +136,7 @@ public class Git {
      * @return The {@link Date} of the specified commit.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid.
      */
+    @NotNull
     @TypeChecked
     public static Date getCommitDate(String commit = 'HEAD') throws IllegalArgumentException {
         def process = "git log -1 --format=%ct $commit".execute()

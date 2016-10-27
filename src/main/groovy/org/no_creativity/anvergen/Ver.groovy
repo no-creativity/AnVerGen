@@ -17,6 +17,9 @@
 
 package org.no_creativity.anvergen
 
+import com.sun.istack.internal.NotNull
+import groovy.transform.TypeChecked
+
 import static org.no_creativity.anvergen.Git.DEFAULT_TAG
 
 /**
@@ -32,6 +35,7 @@ public class Ver {
      *
      * @return The number of commits in git history.
      */
+    @TypeChecked
     public static int generateVersionCode(String commit = 'HEAD')
             throws IllegalArgumentException {
         return Git.calculateCommitCount(null, commit)
@@ -42,6 +46,8 @@ public class Ver {
      *
      * @return The formatted String with git and time information.
      */
+    @NotNull
+    @TypeChecked
     public static String generateVersionName(String commit = 'HEAD')
             throws IllegalArgumentException {
         def describe = Git.getGitDescribe(commit)
