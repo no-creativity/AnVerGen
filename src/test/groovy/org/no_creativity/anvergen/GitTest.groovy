@@ -116,11 +116,18 @@ class GitTest {
     @Test
     public void getGitDescribe() throws Exception {
         def describe = Git.getGitDescribe()
-        def splits = describe.split('-')
+        def sha1_7 = Git.getShortSha1(7)
         def tag = Git.getLatestTag()
-        assertEquals(tag, splits[0])
-        assertEquals(Git.calculateCommitCount(tag), splits[1].toInteger())
-        assertEquals(Git.getShortSha1(), splits[2].substring(1))
+        if (describe.contains("-g$sha1_7")) {
+            assertTrue(describe.startsWith(tag))
+            assertTrue(describe.endsWith(sha1_7))
+            def count = Git.calculateCommitCount(tag)
+            assertTrue(describe.contains(count.toString()))
+        } else if (!sha1_7.equals(describe)) {
+            assertEquals(tag, describe)
+        } else {
+            assertEquals(Git.DEFAULT_TAG, describe)
+        }
     }
 
     @Test
