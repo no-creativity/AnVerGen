@@ -73,9 +73,13 @@ public class Git {
     }
 
     /**
+     * Find the latest tag along the specified git branch.
+     * <p>
      * If there is no git tag yet, then this returns {@link #DEFAULT_TAG}.
      *
+     * @param commit
      * @return The latest git tag.
+     * @throws IllegalArgumentException
      * @see #DEFAULT_TAG
      */
     @NotNull
@@ -95,6 +99,13 @@ public class Git {
         }
     }
 
+    /**
+     * It's a wrapper of `git describe`.
+     *
+     * @param commit The position of `git describe`.
+     * @return The result of `git describe --always --tags` at the <code>commit</code>.
+     * @throws IllegalArgumentException When the <code>commit</code> is not valid.
+     */
     @NotNull
     @TypeChecked
     public static String getGitDescribe(String commit = 'HEAD') throws IllegalArgumentException {

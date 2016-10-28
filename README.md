@@ -15,22 +15,25 @@ It is a git based version generator, and git tags are the most important referen
 
 ### Generate with git
 
-The version code will be the commit count of git, and the version name will be a specific string.
+The version code will be the commit count of git, and the version name will be a result of `git describe`.
 
-```groovy
-    "$version.$subVersion.$date.$shortSha1"
-```
+- If the current commit has a tag on it, then the version name is the tag.
+- If the current commit has no tag on it, then the version name is `$tag-$count-g$sha1_7`.
+    + `$tag` is the previous tag name along the branch.
+    + `$count` is the commit count from the previous tag to current.
+    + `g` means the version control system is Git.
+    + `$sha1_7` means the first 7 characters of the current SHA1.
+    + It's the original `git describe` result above.
+- If there is no tag in the repository, then assume the tag is `0.0`. Others are the same as above.
 
-- `version` is the latest `git tag`. It is recommended to name the git tag like 0.1, 1.0 and so on.
-- `subVersion` is the commit count from the latest `git tag`. If the current git head is the tag, then the count is 0.
-- `date` is the date of the latest commit, formatted as `yyMMdd`.
-- `shortSha1` is a substring of SHA1 of current git object.
+Finally, the version name is something like `0.5` at the tag `0.5`, and `0.4-8-g8292719` at the commit `0.5^`.
 
-Finally, the version name is something like `0.2.14.161013.fcc3088`. `0.2` is the latest git tag. `14` is the commit count from tag `0.2`.
+As you see, the tag name of your git repository is recommended to be something like `0.1`, `1.0`.
 
 ### Add to dependency
 
-It's a version generator used in the gradle build script.
+It's a version generator used in the **gradle build script**.
+
 It's not a dependency of an application, but a dependency of a gradle build script, so there is a little difference from other JARs.
 
 Modify the `build.gradle` in the root directory. You can get this JAR from Bintray:
@@ -39,11 +42,9 @@ Modify the `build.gradle` in the root directory. You can get this JAR from Bintr
 buildscript {
     repositories {
         jcenter()
-        // This is the private maven repository below.
-        // maven { url "https://dl.bintray.com/no-creativity/maven" }
     }
     dependencies {
-        classpath 'org.no_creativity:AnVerGen:0.3.0'
+        classpath 'org.no_creativity:AnVerGen:0.6.0'
     }
 }
 ```
@@ -57,7 +58,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.github.no-creativity:AnVerGen:0.3'
+        classpath 'com.github.no-creativity:AnVerGen:0.6'
     }
 }
 ```
@@ -77,7 +78,7 @@ android {
 }
 ```
 
-You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/0.3/javadoc/) for more usage.
+You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/0.6/javadoc/) for more usage.
 
 ## Change request
 

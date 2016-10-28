@@ -1,6 +1,13 @@
 RELEASE NOTE
 ============
 
+Release version: 0.6
+------------------------
+
+Change the version name style to `git describe`.
+
+It's very different from previous releases.
+
 Release version: 0.5
 ------------------------
 

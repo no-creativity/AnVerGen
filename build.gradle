@@ -123,7 +123,7 @@ task writeDescriptor << {
         }
         'version' {
             name version
-            desc 'It is a stable release with major functions.'
+            desc 'This release has great changes. It\'s not compatible with versions before.'
             released date.format('yyyy-MM-dd')
             vcs_tag tag
             gpgSign true
