@@ -42,8 +42,7 @@ class VerTest {
 
     @Test
     public void testGenerateVersionCode1() throws Exception {
-        def head = Ver.generateVersionCode()
-        assertEquals(head, Ver.generateVersionCode('HEAD'))
+        assertEquals(Ver.generateVersionCode(), Ver.generateVersionCode('HEAD'))
         assertEquals(30, Ver.generateVersionCode('0.2'))
 
         testIllegalArgumentException {
@@ -65,6 +64,9 @@ class VerTest {
 
     @Test
     public void testGenerateVersionName1() throws Exception {
+        assertEquals(Ver.generateVersionName(), Ver.generateVersionName('HEAD'))
+        assertEquals(Git.getGitDescribe('0.3'), Ver.generateVersionName('0.3'))
+        assertEquals(Git.getGitDescribe('0.3^'), Ver.generateVersionName('0.3^'))
         assertEquals('0.2', Ver.generateVersionName('0.2'))
         assertEquals('0.1-13-g878ab83', Ver.generateVersionName('0.2^'))
         assertEquals("$DEFAULT_TAG-15-ge69aa71".toString(), Ver.generateVersionName('0.1^'))

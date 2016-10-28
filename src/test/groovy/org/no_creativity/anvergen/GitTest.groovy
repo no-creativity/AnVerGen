@@ -55,8 +55,8 @@ class GitTest {
         assertEquals(count, Git.calculateCommitCount(null))
         assertEquals(count, Git.calculateCommitCount(' '))
         assertEquals(count, Git.calculateCommitCount(Git.DEFAULT_TAG))
-        assertEquals(0, Git.calculateCommitCount("HEAD"))
-        assertEquals(1, Git.calculateCommitCount("HEAD^"))
+        assertEquals(0, Git.calculateCommitCount('HEAD'))
+        assertEquals(1, Git.calculateCommitCount('HEAD^'))
 
         testIllegalArgumentException {
             Git.calculateCommitCount(INVALID_COMMIT)
@@ -69,10 +69,10 @@ class GitTest {
     @Test
     public void getCommitCount2() throws Exception {
         def count = Git.calculateCommitCount()
-        assertEquals(count - 1, Git.calculateCommitCount(null, 'HEAD^'))
-        assertEquals(count - 1, Git.calculateCommitCount(' ', 'HEAD^'))
-        assertEquals(count - 1, Git.calculateCommitCount(Git.DEFAULT_TAG, 'HEAD^'))
-        assertEquals(2, Git.calculateCommitCount("HEAD~3", "HEAD^"))
+        assertEquals(count - 1, Git.calculateCommitCount(null, 'HEAD~1'))
+        assertEquals(count - 2, Git.calculateCommitCount(' ', 'HEAD~2'))
+        assertEquals(count - 3, Git.calculateCommitCount(Git.DEFAULT_TAG, 'HEAD~3'))
+        assertEquals(2, Git.calculateCommitCount("HEAD~3", "HEAD~1"))
         assertEquals(0, Git.calculateCommitCount("HEAD~3", "HEAD~3"))
 
         final String[] INVALID_PAIRS = [
@@ -104,6 +104,7 @@ class GitTest {
     public void getLatestTag1() throws Exception {
         assertEquals(Git.getLatestTag(), Git.getLatestTag('HEAD'))
         assertEquals('0.1', Git.getLatestTag('0.1'))
+        assertEquals(Git.getGitDescribe('0.2'), Git.getLatestTag('0.2'))
         assertEquals('0.1', Git.getLatestTag('0.2^'))
         assertEquals(Git.DEFAULT_TAG, Git.getLatestTag('0.1^'))
 
@@ -158,8 +159,13 @@ class GitTest {
 
     @Test
     public void getShortSha1_2() throws Exception {
+        def commit = '0.3^'
+        def sha1 = '92174a8b049937d9de05b41b5091e617cc7058dd'
+        assertEquals(sha1, Git.getShortSha1(40, commit))
+        assertEquals(sha1.substring(0, 9), Git.getShortSha1(9, commit))
+
         testLength {
-            int i -> Git.getShortSha1(i, '0.5')
+            int i -> Git.getShortSha1(i, commit)
         }
 
         testIllegalArgumentException {
