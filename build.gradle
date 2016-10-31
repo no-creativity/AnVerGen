@@ -20,17 +20,16 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.no_creativity:AnVerGen:0.3.0'
+        classpath 'org.no_creativity:AnVerGen:0.6.0'
     }
 }
 
 import groovy.json.JsonBuilder
 import org.no_creativity.anvergen.Git
-
-def tag = Git.getLatestTag()
+import org.no_creativity.anvergen.Ver
 
 group 'org.no_creativity'
-version "${tag}.${Git.calculateCommitCount(tag)}"
+version Ver.generateVersionName()
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
@@ -125,7 +124,7 @@ task writeDescriptor << {
             name version
             desc 'This release has great changes. It\'s not compatible with versions before.'
             released date.format('yyyy-MM-dd')
-            vcs_tag tag
+            vcs_tag Git.getLatestTag()
             gpgSign true
         }
         publish true
