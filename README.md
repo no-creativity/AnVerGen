@@ -2,6 +2,7 @@
 
 [![Travis](https://travis-ci.org/no-creativity/AnVerGen.svg?branch=master)](https://travis-ci.org/no-creativity/AnVerGen)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/91b78sqeuro6abg8?svg=true)](https://ci.appveyor.com/project/yanqd0/anvergen)
+[![Releases](https://img.shields.io/github/release/no-creativity/AnVerGen.svg)](https://github.com/no-creativity/AnVerGen/releases/latest)
 [![Bintray](https://api.bintray.com/packages/no-creativity/maven/AnVerGen/images/download.svg)](https://bintray.com/no-creativity/maven/AnVerGen/_latestVersion)
 [![JitPack](https://jitpack.io/v/no-creativity/AnVerGen.svg)](https://jitpack.io/#no-creativity/AnVerGen)
 [![CodeCov](https://codecov.io/gh/no-creativity/AnVerGen/branch/master/graph/badge.svg)](https://codecov.io/gh/no-creativity/AnVerGen)
