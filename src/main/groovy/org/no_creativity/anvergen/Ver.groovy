@@ -54,6 +54,7 @@ public class Ver {
      * It's recommended to use the default: <code>"HEAD"</code>.
      * @return The number of commits in git history.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid.
+     * @since 0.2.0
      */
     @TypeChecked
     public static int generateVersionCode(String commit = 'HEAD')
@@ -70,6 +71,7 @@ public class Ver {
      * It's recommended to use the default: <code>"HEAD"</code>.
      * @return The formatted String with git and time information.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid.
+     * @since 0.2.0
      */
     @NotNull
     @TypeChecked

@@ -54,6 +54,7 @@ public class Git {
      * @param to The end of the commit list to be count.
      * @return The commit count between <code>from</code> and <code>to</code>.
      * @throws IllegalArgumentException When <code>from</code> or <code>to</code> is not valid.
+     * @since 0.2.0
      */
     @TypeChecked
     public static int calculateCommitCount(String from = null, String to = "HEAD")
@@ -81,6 +82,7 @@ public class Git {
      * @return The latest git tag.
      * @throws IllegalArgumentException
      * @see #DEFAULT_TAG
+     * @since 0.6.0
      */
     @NotNull
     @TypeChecked
@@ -124,6 +126,7 @@ public class Git {
      * @return The short SHA1 as the commit description.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid,
      * or the <code>length</code> is not appropriate.
+     * @since 0.6.0
      */
     @NotNull
     @TypeChecked
@@ -146,6 +149,7 @@ public class Git {
      * @param commit The git commit to query.
      * @return The {@link Date} of the specified commit.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid.
+     * @since 0.6.0
      */
     @NotNull
     @TypeChecked
@@ -161,7 +165,8 @@ public class Git {
      * The annotated message of the specific tag.
      *
      * @param tag The message of which to be shown.
-     * @return The annotated message of the {@link tag}.
+     * @return The annotated message.
+     * @since 0.7.0
      */
     @NotNull
     @TypeChecked
