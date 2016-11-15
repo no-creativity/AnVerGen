@@ -157,6 +157,21 @@ public class Git {
         return new Date(utc)
     }
 
+    /**
+     * The annotated message of the specific tag.
+     *
+     * @param tag The message of which to be shown.
+     * @return The annotated message of the {@link tag}.
+     */
+    @NotNull
+    @TypeChecked
+    public static String getTagMessage(@NotNull String tag) {
+        def process = "git tag -ln $tag".execute()
+        process.waitFor()
+        def result = process.getText()
+        return result.substring(tag.length()).trim()
+    }
+
     @TypeChecked
     private static void checkResultOrThrow(Process process, String msg) {
         if (process.exitValue() != 0) {

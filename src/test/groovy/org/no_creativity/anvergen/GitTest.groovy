@@ -205,6 +205,14 @@ class GitTest {
         }
     }
 
+    @Test
+    public void getTagMessage() throws Exception {
+        def tag = '0.5'
+        def tagMsg = 'Fix a bug when no previous tag.'
+        def msg = Git.getTagMessage(tag)
+        assertEquals(tagMsg, msg)
+    }
+
     protected static void testIllegalArgumentException(Closure closure) {
         try {
             closure()
