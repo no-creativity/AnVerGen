@@ -38,9 +38,9 @@ public class Git {
     /**
      * This is the return of {@link #getLatestTag()} if there is no git tag yet.
      * <p>
-     * The default is <code>"0.0"</code>.
+     * The default is <code>"0.0.0"</code>.
      */
-    public final static String DEFAULT_TAG = "0.0"
+    public final static String DEFAULT_TAG = "0.0.0"
 
     private Git() {
         throw new UnsupportedOperationException("This class should never be instantiated!")

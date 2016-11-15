@@ -27,17 +27,31 @@ import static org.no_creativity.anvergen.Git.DEFAULT_TAG
  * <p>
  * <i>It works only in a git repository.</i>
  * <p>
- * Every commit in the release branch has a unique version name based on <code>git describe</code>,
- * and a increasing version code based on <code>git rev-list --count</code>.
- * Every git tag means an official release, and it's name is exactly the tag name.
+ * The version code will be the commit count of git, and the version name will be a result of <code>git describe</code>.
+ * <p>
+ * <h4>How to name a git tag?</h4>
+ * See: <a href="http://semver.org/">Semantic Versioning</a>
+ * <h4>How to use this class?</h4>
+ * <pre>
+ * <code>
+ * import org.no_creativity.anvergen.Ver
  *
+ * android {
+ *     defaultConfig {
+ *         versionCode Ver.generateVersionCode()
+ *         versionName Ver.generateVersionName()
+ *     }
+ * }
+ * </code>
+ * </pre>
  * @author yanqd0
  */
 public class Ver {
     /**
-     * The versionCode is set to the commit count of git repository.
+     * The versionCode is set to the commit count of the current git branch.
      *
-     * @param commit The position where to count backwards. It's recommended to use default.
+     * @param commit The position where to count backwards, which could be SHA1, tag, or branch.
+     * It's recommended to use the default: <code>"HEAD"</code>.
      * @return The number of commits in git history.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid.
      */
@@ -52,7 +66,8 @@ public class Ver {
      * <p>
      * If there is no TAG yet, then the {@link Git#DEFAULT_TAG} is set as the version prefix.
      *
-     * @param commit The position where to generate a name. It's recommended to use default.
+     * @param commit The position where to count backwards, which could be SHA1, tag, or branch.
+     * It's recommended to use the default: <code>"HEAD"</code>.
      * @return The formatted String with git and time information.
      * @throws IllegalArgumentException When the <code>commit</code> is not valid.
      */
