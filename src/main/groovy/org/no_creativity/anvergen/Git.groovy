@@ -177,6 +177,22 @@ public class Git {
         return result.substring(tag.length()).trim()
     }
 
+    /**
+     * Get the message title of the specific commit.
+     *
+     * @param commit The message of which to be shown.
+     * @return The title of the commit message.
+     * @since 0.7.0
+     */
+    @NotNull
+    @TypeChecked
+    public static String getCommitMessage(String commit = 'HEAD') throws IllegalArgumentException {
+        def process = "git log -1 --format=%s $commit".execute()
+        process.waitFor()
+        checkResultOrThrow(process, "The commit $commit is not found!")
+        return process.getText().trim()
+    }
+
     @TypeChecked
     private static void checkResultOrThrow(Process process, String msg) {
         if (process.exitValue() != 0) {

@@ -213,6 +213,17 @@ class GitTest {
         assertEquals(tagMsg, msg)
     }
 
+    @Test
+    public void getCommitMessage() throws Exception {
+        def commit = '0.6^'
+        def commitMsg = 'Release the version 0.6'
+        assertEquals(commitMsg, Git.getCommitMessage(commit))
+
+        testIllegalArgumentException {
+            Git.getCommitMessage(INVALID_COMMIT)
+        }
+    }
+
     protected static void testIllegalArgumentException(Closure closure) {
         try {
             closure()
