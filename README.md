@@ -2,11 +2,12 @@
 
 [![Travis](https://travis-ci.org/no-creativity/AnVerGen.svg?branch=master)](https://travis-ci.org/no-creativity/AnVerGen)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/91b78sqeuro6abg8?svg=true)](https://ci.appveyor.com/project/yanqd0/anvergen)
+[![CodeCov](https://codecov.io/gh/no-creativity/AnVerGen/branch/master/graph/badge.svg)](https://codecov.io/gh/no-creativity/AnVerGen)
+[![VersionEye](https://www.versioneye.com/user/projects/580c87b9912815139a3d0520/badge.svg)](https://www.versioneye.com/user/projects/580c87b9912815139a3d0520)
+
 [![Releases](https://img.shields.io/github/release/no-creativity/AnVerGen.svg)](https://github.com/no-creativity/AnVerGen/releases/latest)
 [![Bintray](https://api.bintray.com/packages/no-creativity/maven/AnVerGen/images/download.svg)](https://bintray.com/no-creativity/maven/AnVerGen/_latestVersion)
 [![JitPack](https://jitpack.io/v/no-creativity/AnVerGen.svg)](https://jitpack.io/#no-creativity/AnVerGen)
-[![CodeCov](https://codecov.io/gh/no-creativity/AnVerGen/branch/master/graph/badge.svg)](https://codecov.io/gh/no-creativity/AnVerGen)
-[![VersionEye](https://www.versioneye.com/user/projects/580c87b9912815139a3d0520/badge.svg)](https://www.versioneye.com/user/projects/580c87b9912815139a3d0520)
 
 An automatic version generator for Android applications, implemented by Groovy.
 
@@ -80,7 +81,7 @@ android {
 }
 ```
 
-You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/1.0.0/javadoc/) for more usage.
+You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/1.0.0/javadoc/) for more usages.
 
 ## Change request
 
@@ -89,6 +90,8 @@ If there is any new demand or problem of this JAR, please give me an [issue](htt
 Or you can fork and distribute it.
 
 ## License
+
+[![License](https://img.shields.io/github/license/no-creativity/AnVerGen.svg)](LICENSE)
 
 ```
    AnVerGen - Android Version Generator
