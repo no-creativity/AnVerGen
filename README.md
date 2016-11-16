@@ -46,7 +46,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.no_creativity:AnVerGen:0.7.0'
+        classpath 'org.no_creativity:AnVerGen:1.0.0'
     }
 }
 ```
@@ -60,7 +60,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.github.no-creativity:AnVerGen:0.7.0'
+        classpath 'com.github.no-creativity:AnVerGen:1.0.0'
     }
 }
 ```
@@ -80,7 +80,7 @@ android {
 }
 ```
 
-You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/0.7.0/javadoc/) for more usage.
+You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/1.0.0/javadoc/) for more usage.
 
 ## Change request
 
@@ -90,8 +90,19 @@ Or you can fork and distribute it.
 
 ## License
 
->  Copyright 2016 Yan QiDong
->
->  Licensed under the Apache License, Version 2.0
->
->  See: <http://www.apache.org/licenses/LICENSE-2.0>
+```
+   AnVerGen - Android Version Generator
+   Copyright 2016 Yan QiDong
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```

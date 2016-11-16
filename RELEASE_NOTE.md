@@ -1,6 +1,11 @@
 RELEASE NOTE
 ============
 
+Release version: 1.0.0
+------------------------
+
+It is the first stable release.
+
 Release version: 0.7.0
 ------------------------
 
