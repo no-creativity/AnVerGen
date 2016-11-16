@@ -12,7 +12,7 @@ An automatic version generator for Android applications, implemented by Groovy.
 
 ## Usage
 
-It is a git based version generator, and git tags are the most important reference.
+It is a git based version generator, and git tags, especially annotated and signed tags, are the most important references.
 
 ### Generate with git
 
@@ -25,11 +25,12 @@ The version code will be the commit count of git, and the version name will be a
     + `g` means the version control system is Git.
     + `$sha1_7` means the first 7 characters of the current SHA1.
     + It's the original `git describe` result above.
-- If there is no tag in the repository, then assume the tag is `0.0`. Others are the same as above.
+- If there is no tag in the repository, then assume the tag is `0.0.0`. Others are the same as above.
 
-Finally, the version name is something like `0.5` at the tag `0.5`, and `0.4-8-g8292719` at the commit `0.5^`.
+Finally, the version name is something like `0.5.0` at the tag `0.5.0`, and `0.4.0-8-g8292719` at the commit `0.5.0^`.
 
-As you see, the tag name of your git repository is recommended to be something like `0.1`, `1.0`.
+As you see, the tag name of your git repository is recommended to be something like `0.1.0`, `1.0.0`.
+It's strongly recommended to read [Semantic Versioning](http://semver.org/) for help.
 
 ### Add to dependency
 
@@ -45,7 +46,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.no_creativity:AnVerGen:0.6.0'
+        classpath 'org.no_creativity:AnVerGen:0.7.0'
     }
 }
 ```
@@ -59,7 +60,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.github.no-creativity:AnVerGen:0.6'
+        classpath 'com.github.no-creativity:AnVerGen:0.7.0'
     }
 }
 ```
@@ -79,7 +80,7 @@ android {
 }
 ```
 
-You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/0.6/javadoc/) for more usage.
+You can read the [groovydoc](https://jitpack.io/com/github/no-creativity/AnVerGen/0.7.0/javadoc/) for more usage.
 
 ## Change request
 

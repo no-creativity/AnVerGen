@@ -1,6 +1,16 @@
 RELEASE NOTE
 ============
 
+Release version: 0.7.0
+------------------------
+
+The final preparation for 1.0.0 release.
+
+- Add 2 method to Git
+- Enhance the groovy doc
+- Change the default tag from `0.0` to `0.0.0`
+- Add [Semantic Versioning](http://semver.org/) to README.md
+
 Release version: 0.6
 ------------------------
 

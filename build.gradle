@@ -105,6 +105,12 @@ task writePom << {
 }
 
 task writeDescriptor << {
+    def tag = Git.getLatestTag()
+    def process = "git tag -ln $tag".execute()
+    process.waitFor()
+    def result = process.getText()
+    def tagDesc = result.substring(tag.length()).trim()
+
     def builder = new JsonBuilder()
     def root = builder {
         'package' {
@@ -122,9 +128,9 @@ task writeDescriptor << {
         }
         'version' {
             name version
-            desc 'This release has great changes. It\'s not compatible with versions before.'
+            desc tagDesc
             released date.format('yyyy-MM-dd')
-            vcs_tag Git.getLatestTag()
+            vcs_tag tag
             gpgSign true
         }
         publish true
