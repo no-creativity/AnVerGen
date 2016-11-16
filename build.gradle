@@ -20,7 +20,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.no_creativity:AnVerGen:0.6.0'
+        classpath 'org.no_creativity:AnVerGen:0.7.0'
     }
 }
 
@@ -106,10 +106,13 @@ task writePom << {
 
 task writeDescriptor << {
     def tag = Git.getLatestTag()
-    def process = "git tag -ln $tag".execute()
-    process.waitFor()
-    def result = process.getText()
-    def tagDesc = result.substring(tag.length()).trim()
+    def versionDesc = {
+        if (tag.equals(Git.getGitDescribe())) {
+            return Git.getTagMessage(tag)
+        } else {
+            return Git.getCommitMessage()
+        }
+    }
 
     def builder = new JsonBuilder()
     def root = builder {
@@ -128,7 +131,7 @@ task writeDescriptor << {
         }
         'version' {
             name version
-            desc tagDesc
+            desc versionDesc()
             released date.format('yyyy-MM-dd')
             vcs_tag tag
             gpgSign true
