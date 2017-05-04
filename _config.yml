@@ -1,8 +1,0 @@
-title: AnVerGen
-description: An automatic version generator for Android applications.
-google_analytics: 
-show_downloads: true
-theme: jekyll-theme-slate
-
-gems:
-  - jekyll-mentions
